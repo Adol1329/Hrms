@@ -1,6 +1,6 @@
 # Employment Management System
 
-A comprehensive employee management system built with Spring Boot and PostgreSQL.
+A comprehensive Human Resources Management System built with Spring Boot, react-vite.jsx and PostgreSQL.
 
 ## Features
 
