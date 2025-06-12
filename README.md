@@ -66,7 +66,7 @@ A comprehensive employee management system built with Spring Boot and PostgreSQL
 ### Database Setup
 1. Create a PostgreSQL database:
 ```sql
-CREATE DATABASE employment_management;
+CREATE DATABASE hrms_db;
 ```
 
 2. Update database configuration in `src/main/resources/application.properties`:
