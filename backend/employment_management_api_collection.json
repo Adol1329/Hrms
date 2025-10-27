@@ -1,0 +1,554 @@
+{
+	"info": {
+		"_postman_id": "random-uuid",
+		"name": "Human Resurces Management System API",
+		"description": "API collection for testing the Employment Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "User Signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john.doe\",\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"securePassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/signup?employeeId={{employeeId}}",
+							"host": ["{{base_url}}"],
+							"path": ["user", "signup"],
+							"query": [
+								{
+									"key": "employeeId",
+									"value": "{{employeeId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Verify Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin.user\",\n    \"password\": \"adminPassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/verify-admin?userId={{userId}}",
+							"host": ["{{base_url}}"],
+							"path": ["user", "verify-admin"],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Employee Management",
+			"item": [
+				{
+					"name": "Save Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phoneNumber\": \"+1234567890\",\n    \"dateOfBirth\": \"1990-01-01\",\n    \"hireDate\": \"2023-01-01\",\n    \"probationEndDate\": \"2023-04-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/employee/save?departmentId={{departmentId}}&positionId={{positionId}}&adminId={{adminId}}",
+							"host": ["{{base_url}}"],
+							"path": ["employee", "save"],
+							"query": [
+								{
+									"key": "departmentId",
+									"value": "{{departmentId}}"
+								},
+								{
+									"key": "positionId",
+									"value": "{{positionId}}"
+								},
+								{
+									"key": "adminId",
+									"value": "{{adminId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe Updated\",\n    \"email\": \"john.doe.updated@example.com\",\n    \"phoneNumber\": \"+1987654321\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/employee/update/{{employeeId}}?adminId={{adminId}}",
+							"host": ["{{base_url}}"],
+							"path": ["employee", "update", "{{employeeId}}"],
+							"query": [
+								{
+									"key": "adminId",
+									"value": "{{adminId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/employee/all?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["employee", "all"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Department Management",
+			"item": [
+				{
+					"name": "Save Department",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Human Resources\",\n    \"description\": \"HR Department\",\n    \"location\": \"Building A, Floor 2\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/department/save?adminId={{adminId}}",
+							"host": ["{{base_url}}"],
+							"path": ["department", "save"],
+							"query": [
+								{
+									"key": "adminId",
+									"value": "{{adminId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Departments",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/department/all?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["department", "all"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Contract Management",
+			"item": [
+				{
+					"name": "Save Contract",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"PERMANENT\",\n    \"startDate\": \"2023-01-01\",\n    \"endDate\": \"2024-01-01\",\n    \"status\": \"ACTIVE\",\n    \"terms\": \"Standard employment terms\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contract/save?employeeId={{employeeId}}&adminId={{adminId}}",
+							"host": ["{{base_url}}"],
+							"path": ["contract", "save"],
+							"query": [
+								{
+									"key": "employeeId",
+									"value": "{{employeeId}}"
+								},
+								{
+									"key": "adminId",
+									"value": "{{adminId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Contracts",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/contract/all?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["contract", "all"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Salary Management",
+			"item": [
+				{
+					"name": "Save Salary",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"baseSalary\": 50000,\n    \"bonus\": 5000,\n    \"effectiveDate\": \"2023-01-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/salary/save?employeeId={{employeeId}}&adminId={{adminId}}",
+							"host": ["{{base_url}}"],
+							"path": ["salary", "save"],
+							"query": [
+								{
+									"key": "employeeId",
+									"value": "{{employeeId}}"
+								},
+								{
+									"key": "adminId",
+									"value": "{{adminId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Salaries",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/salary/all?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["salary", "all"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Position Management",
+			"item": [
+				{
+					"name": "Save Position",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Software Engineer\",\n    \"description\": \"Develops software applications\",\n    \"level\": \"SENIOR\",\n    \"requirements\": \"5+ years of experience\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/position/save?departmentId={{departmentId}}&adminId={{adminId}}",
+							"host": ["{{base_url}}"],
+							"path": ["position", "save"],
+							"query": [
+								{
+									"key": "departmentId",
+									"value": "{{departmentId}}"
+								},
+								{
+									"key": "adminId",
+									"value": "{{adminId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Positions",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/position/all?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["position", "all"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Document Management",
+			"item": [
+				{
+					"name": "Upload Document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Employment Contract\",\n    \"type\": \"CONTRACT\",\n    \"content\": \"Base64EncodedContent\",\n    \"uploadDate\": \"2023-01-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/document/upload?employeeId={{employeeId}}",
+							"host": ["{{base_url}}"],
+							"path": ["document", "upload"],
+							"query": [
+								{
+									"key": "employeeId",
+									"value": "{{employeeId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Documents",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/document/all",
+							"host": ["{{base_url}}"],
+							"path": ["document", "all"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Time Off Management",
+			"item": [
+				{
+					"name": "Submit Time Off Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startDate\": \"2023-12-25\",\n    \"endDate\": \"2023-12-31\",\n    \"type\": \"VACATION\",\n    \"reason\": \"Year-end vacation\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/time-off/submit?employeeId={{employeeId}}",
+							"host": ["{{base_url}}"],
+							"path": ["time-off", "submit"],
+							"query": [
+								{
+									"key": "employeeId",
+									"value": "{{employeeId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Time Off Requests",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/time-off/all",
+							"host": ["{{base_url}}"],
+							"path": ["time-off", "all"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Get Admin Dashboard Summary",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/admin/summary",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "admin", "summary"]
+						}
+					}
+				},
+				{
+					"name": "Get User Dashboard Summary",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/dashboard/user/summary",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dashboard", "user", "summary"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Global Search",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/search/global?query={{searchQuery}}&page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "search", "global"],
+							"query": [
+								{
+									"key": "query",
+									"value": "{{searchQuery}}"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "employeeId",
+			"value": "your-employee-uuid"
+		},
+		{
+			"key": "adminId",
+			"value": "your-admin-uuid"
+		},
+		{
+			"key": "departmentId",
+			"value": "your-department-uuid"
+		},
+		{
+			"key": "positionId",
+			"value": "your-position-uuid"
+		},
+		{
+			"key": "userId",
+			"value": "your-user-uuid"
+		},
+		{
+			"key": "searchQuery",
+			"value": "your-search-term"
+		}
+	]
+} 

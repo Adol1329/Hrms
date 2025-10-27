@@ -1,0 +1,416 @@
+{
+  "auth": {
+    "signup": {
+      "url": "/api/auth/signup",
+      "method": "POST",
+      "description": "Register a new user",
+      "body": {
+        "email": "test@example.com",
+        "password": "SecurePass123!",
+        "role": "User"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "hasToken": true
+      }
+    },
+    "verifyEmail": {
+      "url": "/api/auth/verify-email",
+      "method": "POST",
+      "description": "Verify user's email",
+      "params": {
+        "email": "test@example.com",
+        "code": "123456"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Email verified successfully"
+      }
+    },
+    "login": {
+      "url": "/api/auth/login",
+      "method": "POST",
+      "description": "Login user",
+      "body": {
+        "email": "test@example.com",
+        "password": "SecurePass123!",
+        "twoFactorCode": "123456"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "hasToken": true,
+        "hasRefreshToken": true
+      }
+    },
+    "refreshToken": {
+      "url": "/api/auth/refresh-token",
+      "method": "POST",
+      "description": "Refresh authentication token",
+      "body": {
+        "refreshToken": "your-refresh-token"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "hasNewToken": true
+      }
+    },
+    "forgotPassword": {
+      "url": "/api/auth/forgot-password",
+      "method": "POST",
+      "description": "Initiate password reset",
+      "params": {
+        "email": "test@example.com"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Password reset instructions sent"
+      }
+    },
+    "resetPassword": {
+      "url": "/api/auth/reset-password",
+      "method": "POST",
+      "description": "Reset password with token",
+      "params": {
+        "token": "reset-token",
+        "newPassword": "NewSecurePass123!"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Password reset successfully"
+      }
+    }
+  },
+  "employee": {
+    "save": {
+      "url": "/employee/save",
+      "method": "POST",
+      "description": "Create new employee",
+      "body": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "phoneNumber": "+1234567890",
+        "dateOfBirth": "1990-01-01",
+        "hireDate": "2023-01-01",
+        "address": "123 Main St, City, Country",
+        "emergencyContact": "Jane Doe: +1987654321"
+      },
+      "params": {
+        "departmentId": "UUID",
+        "positionId": "UUID",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Employee saved successfully"
+      }
+    },
+    "bulkSave": {
+      "url": "/employee/bulk-save",
+      "method": "POST",
+      "description": "Create multiple employees",
+      "body": [
+        {
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "john.doe@example.com"
+        },
+        {
+          "firstName": "Jane",
+          "lastName": "Smith",
+          "email": "jane.smith@example.com"
+        }
+      ],
+      "params": {
+        "departmentId": "UUID",
+        "positionId": "UUID",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Bulk employees saved successfully"
+      }
+    },
+    "update": {
+      "url": "/employee/update/{employeeId}",
+      "method": "PUT",
+      "description": "Update employee details",
+      "pathVariables": {
+        "employeeId": "UUID"
+      },
+      "body": {
+        "firstName": "John",
+        "lastName": "Doe Updated",
+        "email": "john.doe.updated@example.com"
+      },
+      "params": {
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Employee updated successfully"
+      }
+    },
+    "transfer": {
+      "url": "/employee/transfer/{employeeId}",
+      "method": "PUT",
+      "description": "Transfer employee to new department/position",
+      "pathVariables": {
+        "employeeId": "UUID"
+      },
+      "params": {
+        "departmentId": "UUID",
+        "positionId": "UUID",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Employee transferred successfully"
+      }
+    }
+  },
+  "department": {
+    "save": {
+      "url": "/department/save",
+      "method": "POST",
+      "description": "Create new department",
+      "body": {
+        "name": "IT Department",
+        "description": "Information Technology Department",
+        "location": "HQ Building"
+      },
+      "params": {
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Department saved successfully"
+      }
+    },
+    "update": {
+      "url": "/department/update/{departmentId}",
+      "method": "PUT",
+      "description": "Update department details",
+      "pathVariables": {
+        "departmentId": "UUID"
+      },
+      "body": {
+        "name": "IT Department Updated",
+        "description": "Updated Description"
+      },
+      "params": {
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Department updated successfully"
+      }
+    }
+  },
+  "contract": {
+    "save": {
+      "url": "/contract/save",
+      "method": "POST",
+      "description": "Create new contract",
+      "body": {
+        "startDate": "2023-01-01",
+        "endDate": "2024-01-01",
+        "type": "PERMANENT",
+        "status": "ACTIVE",
+        "terms": "Standard employment terms",
+        "salary": 50000
+      },
+      "params": {
+        "employeeId": "UUID",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Contract saved successfully"
+      }
+    },
+    "updateStatus": {
+      "url": "/contract/update-status/{contractId}",
+      "method": "PUT",
+      "description": "Update contract status",
+      "pathVariables": {
+        "contractId": "UUID"
+      },
+      "params": {
+        "status": "TERMINATED",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Contract status updated successfully"
+      }
+    },
+    "extend": {
+      "url": "/contract/extend/{contractId}",
+      "method": "PUT",
+      "description": "Extend contract duration",
+      "pathVariables": {
+        "contractId": "UUID"
+      },
+      "params": {
+        "newEndDate": "2025-01-01",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Contract extended successfully"
+      }
+    }
+  },
+  "salary": {
+    "save": {
+      "url": "/salary/save",
+      "method": "POST",
+      "description": "Create new salary record",
+      "body": {
+        "amount": 50000,
+        "effectiveDate": "2023-01-01",
+        "currency": "USD",
+        "type": "BASE"
+      },
+      "params": {
+        "employeeId": "UUID",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Salary saved successfully"
+      }
+    },
+    "search": {
+      "url": "/salary/search",
+      "method": "GET",
+      "description": "Search salaries within range",
+      "params": {
+        "minSalary": 40000,
+        "maxSalary": 60000,
+        "page": 0,
+        "size": 10
+      },
+      "expectedResponse": {
+        "status": 200,
+        "hasContent": true
+      }
+    }
+  },
+  "timeOff": {
+    "submit": {
+      "url": "/time-off/submit",
+      "method": "POST",
+      "description": "Submit time off request",
+      "body": {
+        "startDate": "2023-12-24",
+        "endDate": "2023-12-31",
+        "type": "VACATION",
+        "reason": "Year-end vacation"
+      },
+      "params": {
+        "employeeId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Time-off request submitted successfully"
+      }
+    },
+    "updateStatus": {
+      "url": "/time-off/update-status/{requestId}",
+      "method": "PUT",
+      "description": "Update time off request status",
+      "pathVariables": {
+        "requestId": "UUID"
+      },
+      "params": {
+        "status": "APPROVED",
+        "adminId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Request status updated successfully"
+      }
+    }
+  },
+  "document": {
+    "upload": {
+      "url": "/document/upload",
+      "method": "POST",
+      "description": "Upload employee document",
+      "body": {
+        "title": "Contract Document",
+        "type": "CONTRACT",
+        "content": "Base64EncodedContent",
+        "description": "Employment contract document"
+      },
+      "params": {
+        "employeeId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "message": "Document uploaded successfully"
+      }
+    }
+  },
+  "dashboard": {
+    "adminSummary": {
+      "url": "/api/dashboard/admin/summary",
+      "method": "GET",
+      "description": "Get admin dashboard summary",
+      "expectedResponse": {
+        "status": 200,
+        "hasContent": true
+      }
+    },
+    "userSummary": {
+      "url": "/api/dashboard/user/summary",
+      "method": "GET",
+      "description": "Get user dashboard summary",
+      "expectedResponse": {
+        "status": 200,
+        "hasContent": true
+      }
+    }
+  },
+  "search": {
+    "global": {
+      "url": "/api/search/global",
+      "method": "GET",
+      "description": "Global search across all entities",
+      "params": {
+        "query": "search term",
+        "page": 0,
+        "size": 10
+      },
+      "expectedResponse": {
+        "status": 200,
+        "hasContent": true
+      }
+    }
+  },
+  "audit": {
+    "getAllLogs": {
+      "url": "/audit/all",
+      "method": "GET",
+      "description": "Get all audit logs",
+      "expectedResponse": {
+        "status": 200,
+        "hasContent": true
+      }
+    },
+    "getUserLogs": {
+      "url": "/audit/user/{userId}",
+      "method": "GET",
+      "description": "Get audit logs for specific user",
+      "pathVariables": {
+        "userId": "UUID"
+      },
+      "expectedResponse": {
+        "status": 200,
+        "hasContent": true
+      }
+    }
+  }
+} 
